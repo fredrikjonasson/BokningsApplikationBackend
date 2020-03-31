@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JohanStrandberg\\bokningsapplikationbackend\\WebApi\\Domain\\Domain.csproj": {}
+    "C:\\Users\\EliasNilsson\\dev\\BokningsApplikationBackend\\WebApi\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JohanStrandberg\\bokningsapplikationbackend\\WebApi\\Domain\\Domain.csproj": {
+    "C:\\Users\\EliasNilsson\\dev\\BokningsApplikationBackend\\WebApi\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JohanStrandberg\\bokningsapplikationbackend\\WebApi\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\EliasNilsson\\dev\\BokningsApplikationBackend\\WebApi\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\JohanStrandberg\\bokningsapplikationbackend\\WebApi\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\JohanStrandberg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JohanStrandberg\\bokningsapplikationbackend\\WebApi\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\EliasNilsson\\dev\\BokningsApplikationBackend\\WebApi\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\EliasNilsson\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EliasNilsson\\dev\\BokningsApplikationBackend\\WebApi\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\JohanStrandberg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\EliasNilsson\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

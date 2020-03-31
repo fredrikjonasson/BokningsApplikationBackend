@@ -12,17 +12,9 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class EventsController : ControllerBase
     {
-        private readonly ILogger<EventsController> _logger;
-
-        public EventsController(ILogger<EventsController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpPost]
-        public void Post(Event theEvent)
+        public void Post(Event eventDto)
         {
-
         }
     }
 }
