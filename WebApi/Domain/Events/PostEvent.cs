@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Domain.Interfaces;
+using System;
 
 namespace Domain.Events
 {
-    public class PostEvent
+    public class PostEvent : IPostEvent
     {
         public Event Execute()
         {

@@ -1,3 +1,5 @@
+using Domain.Events;
+using Domain.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +25,7 @@ namespace WebApi
         {
             services.AddControllers();
             services.AddDbContext<EventContext>(opt => opt.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
+            services.AddScoped<IPostEvent, PostEvent>();
        
         }
 
