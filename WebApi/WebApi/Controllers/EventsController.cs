@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain;
+﻿using Domain;
+using Domain.Events;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace WebApi.Controllers
 {
@@ -12,9 +8,19 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class EventsController : ControllerBase
     {
-        [HttpPost]
-        public void Post(Event eventDto)
+
+        public EventsController()
         {
+
+        }
+
+        [HttpPost]
+        public ActionResult Post(Event eventDto)
+        {
+            var command = new PostEvent();
+            var cratedEvent = command.Execute();
+            return Ok(cratedEvent):
+
         }
     }
 }

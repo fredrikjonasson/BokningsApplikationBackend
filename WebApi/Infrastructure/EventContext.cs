@@ -5,8 +5,12 @@ namespace Infrastructure
 {
     public class EventContext : DbContext
     {
-        DbSet<Event> Events { get; set; }
+        public EventContext(DbContextOptions<EventContext> options) : base(options)
+        {
 
-        DbSet<Organizer> Organizers { get; set; }
+        }
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<Organizer> Organizers { get; set; }
     }
 }
