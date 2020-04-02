@@ -6,6 +6,6 @@ namespace Domain.Interfaces
 {
     public interface IPostEvent
     {
-        public Event Execute();
+        public Event Execute(Event @event);
     }
 }
