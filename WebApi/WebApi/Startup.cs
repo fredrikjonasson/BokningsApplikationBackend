@@ -25,7 +25,9 @@ namespace WebApi
         {
             services.AddControllers();
             services.AddDbContext<EventContext>(opt => opt.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
-            services.AddScoped<IPostEvent, PostEvent>();       
+            services.AddScoped<IPostEvent, PostEvent>();
+            services.AddScoped<IGetEvent, GetEvent>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +37,9 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+            app.UseMiddleware<MiddlewareExceptionHandler>();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

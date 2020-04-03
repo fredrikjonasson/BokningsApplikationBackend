@@ -2,6 +2,7 @@
 using Domain.Events;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -9,18 +10,28 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class EventsController : ControllerBase
     {
-        public IPostEvent eventDto { get; set; }
+        public IPostEvent postEvent { get; set; }
+        public IGetEvent getEvent { get; set; }
 
-        public EventsController(IPostEvent eventDto)
+        public EventsController(IPostEvent postEvent, IGetEvent getEvent)
         {
-            this.eventDto = eventDto;
+            this.postEvent = postEvent;
+            this.getEvent = getEvent;
         }
 
         [HttpPost]
-        public ActionResult Post(IPostEvent eventDto)
+        public ActionResult Post(Event myEvent)
         {
-            var cratedEvent = eventDto.Execute();
-            return Ok(cratedEvent);
+            var @event = postEvent.Execute(myEvent);
+            return CreatedAtAction(nameof(GetById), @event.Id, @event);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult GetById(Guid id)
+        {
+            var @event = getEvent.Execute(id);
+            return Ok(@event);
         }
     }
 }

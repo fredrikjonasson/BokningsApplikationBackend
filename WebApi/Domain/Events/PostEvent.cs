@@ -15,9 +15,10 @@ namespace Domain.Events
 
         public Event Execute(Event @event)
         {
-            dbContext.Add<Event>(@event);
+            var myEvent = dbContext.Add<Event>(@event);
             dbContext.SaveChanges();
-            throw new NotImplementedException();
+
+            return myEvent.Entity;
         }
     }
 }
