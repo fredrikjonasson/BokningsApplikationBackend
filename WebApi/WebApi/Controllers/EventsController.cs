@@ -1,9 +1,6 @@
 ﻿using Domain;
-using Domain.Events;
 using Domain.Interfaces;
-using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace WebApi.Controllers
@@ -22,10 +19,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody]Event myEvent)
+        public ActionResult Post(Event myEvent)
         {
             var @event = _postEvent.Execute(myEvent);
-            return CreatedAtAction(nameof(GetById), @event.Id, @event);
+            return CreatedAtAction(nameof(GetById), new { id = @event.Id }, @event);
         }
 
         [HttpGet]
