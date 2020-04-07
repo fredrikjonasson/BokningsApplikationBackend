@@ -15,6 +15,7 @@ namespace Domain.Events
 
         public Event Execute(Event @event)
         {
+            //Göra Repository pattern???
             var myEvent = dbContext.Add<Event>(@event);
             dbContext.SaveChanges();
 
