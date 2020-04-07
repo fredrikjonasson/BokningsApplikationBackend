@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using WebApi.DependencyInjection;
 
 namespace WebApi
 {
@@ -24,10 +25,9 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<EventContext>(opt => opt.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
             services.AddScoped<IGetEvent, GetEvent>();
             services.AddScoped<IPostEvent, PostEvent>();
-            services.AddScoped<DbContext, EventContext>();
+            services.AddInMemoryDb();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
