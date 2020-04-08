@@ -44,6 +44,14 @@ namespace WebApi
 
             app.UseRouting();
 
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://example.com",
+                                    "http://www.contoso.com",
+                                    "https://localhost:44375",
+                                    "http://localhost:3000");
+            });
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
