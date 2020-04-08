@@ -25,9 +25,9 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IGetEvent, GetEvent>();
-            services.AddScoped<IPostEvent, PostEvent>();
+            services.AddUseCases();
             services.AddInMemoryDb();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,10 +47,9 @@ namespace WebApi
             // Shows UseCors with CorsPolicyBuilder.
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://example.com",
-                                    "http://www.contoso.com",
-                                    "https://localhost:44375",
-                                    "http://localhost:3000");
+                builder.WithOrigins(Configuration.GetValue<string>("AllowedHosts"));
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
             });
             app.UseAuthorization();
 

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi.DependencyInjection
 {
-    public static class InMemoryDbExstension
+    public static class InMemoryDbExtension
     {
         public static IServiceCollection AddInMemoryDb(this IServiceCollection services)
         {
