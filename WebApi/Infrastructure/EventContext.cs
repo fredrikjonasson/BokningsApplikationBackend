@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Events;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure

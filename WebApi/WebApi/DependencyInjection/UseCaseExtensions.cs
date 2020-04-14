@@ -1,5 +1,5 @@
 ﻿using Domain.Events;
-using Domain.Interfaces;
+using Domain.Events.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

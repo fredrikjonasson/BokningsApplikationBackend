@@ -1,5 +1,4 @@
 using Domain.Events;
-using Domain.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,7 +37,7 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware<MiddlewareExceptionHandler>();
+            app.UseMiddleware<MiddlewareExceptionHandler>();
 
             app.UseHttpsRedirection();
 

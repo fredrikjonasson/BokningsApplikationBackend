@@ -1,5 +1,6 @@
 ﻿using Domain;
-using Domain.Interfaces;
+using Domain.Events;
+using Domain.Events.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
