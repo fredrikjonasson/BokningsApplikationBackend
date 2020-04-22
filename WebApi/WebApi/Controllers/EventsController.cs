@@ -1,8 +1,12 @@
 ﻿using Domain;
 using Domain.Events;
+using Domain.Events.Extensions;
 using Domain.Events.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebApi.Controllers
 {
@@ -20,9 +24,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Event myEvent)
+        public ActionResult Post(EventDto myEvent)
         {
-            var @event = _postEvent.Execute(myEvent);
+            var @convertedEvent = myEvent.ConvertToDomain();
+            var @event = _postEvent.Execute(convertedEvent);
             return CreatedAtAction(nameof(GetById), new { id = @event.Id }, @event);
         }
 

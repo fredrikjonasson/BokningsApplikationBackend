@@ -37,7 +37,8 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<MiddlewareExceptionHandler>();
+            // Middleware gör att vårt api inte fungerar.
+            //app.UseMiddleware<MiddlewareExceptionHandler>();
 
             app.UseHttpsRedirection();
 

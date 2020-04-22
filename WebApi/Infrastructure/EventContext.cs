@@ -10,7 +10,7 @@ namespace Infrastructure
         {
 
         }
-        public DbSet<Event> Events { get; set; }
+        public DbSet<Entities.Event> Events { get; set; }
 
         public DbSet<Organizer> Organizers { get; set; }
     }
