@@ -1,23 +1,22 @@
 ﻿using Domain.Events.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Events
 {
     public class GetEvent : IGetEvent
     {
         private readonly DbContext _dbContext;
+        private readonly IEventRespository _eventRepository;
 
-        public GetEvent(DbContext dbContext)
+        public GetEvent(IEventRespository repository)
         {
-            _dbContext = dbContext;
+            _eventRepository = repository;
         }
 
-        public Event Execute(Guid id)
+        public IEvent Execute(Guid id)
         {
-            return _dbContext.Find<Event>(id);
+            return _eventRepository.GetById(id);
         }
     }
 }

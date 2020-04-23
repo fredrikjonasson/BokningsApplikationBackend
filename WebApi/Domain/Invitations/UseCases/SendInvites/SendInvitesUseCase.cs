@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Invitations.UseCases
 {
-    public class SendInvitesUseCase
+    public class SendInvitesUseCase : IUseCase<InvitationInput>
     {
         private readonly DbContext _context;
         private readonly IInvitationFactory _invitationsFactory;
@@ -15,11 +14,11 @@ namespace Domain.Invitations.UseCases
             _invitationsFactory = invitationsFactory;
         }
 
-        public void Execute(List<string> invitations, Guid eventId)
+        public void Execute(InvitationInput input)
         {
-            invitations.ForEach((invitation) =>
+            input.Emails.ForEach((email) =>
             {
-                _context.Add(_invitationsFactory.CreateInvite(invitation, eventId));
+                _context.Add(_invitationsFactory.CreateInvite(email, input.EventId));
             });
             _context.SaveChanges();
         }
