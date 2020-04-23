@@ -1,6 +1,6 @@
-﻿using Domain.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Domain.Events;
 
 namespace Infrastructure.Entities
 {
@@ -10,6 +10,13 @@ namespace Infrastructure.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
-        public List<Invitation> SentInvitations { get; set; }
+        public List<Invitation> SentInvitations { get; set; } = new List<Invitation>();
+
+        public Event(string name, string description, DateTime startDate)
+        {
+            Name = name;
+            Description = description;
+            StartDate = startDate;
+        }
     }
 }

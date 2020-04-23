@@ -30,8 +30,8 @@ namespace UnitTests
                 Description = "Partayy!",
                 StartDate = DateTime.Now
             };
-
-            var useCase = new PostEvent(_dbContext);
+            var factory = new EntitiesFactory();
+            var useCase = new PostEvent(_dbContext, factory);
             var @event = useCase.Execute(myEvent);
 
             Assert.NotEqual(@event.Id, Guid.Empty);
