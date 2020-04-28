@@ -30,7 +30,7 @@ namespace UnitTests
                 Description = "Partayy!",
                 StartDate = DateTime.Now
             };
-            var factory = new EntitiesFactory();
+            var factory = new Infrastructure.EventFactory();
             var useCase = new PostEvent(_dbContext, factory);
             var @event = useCase.Execute(myEvent);
 

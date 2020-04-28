@@ -13,10 +13,10 @@ namespace WebApi.DependencyInjection
         public static IServiceCollection AddUseCases(this IServiceCollection services) {
             services.AddScoped<IGetEvent, GetEvent>();
             services.AddScoped<IPostEvent, PostEvent>();
-            services.AddScoped<IEventFactory, EntitiesFactory>();
+            services.AddScoped<IEventFactory, Infrastructure.EventFactory>();
 
             services.AddScoped<IUseCase<InvitationInput>, SendInvitesUseCase>();
-            services.AddScoped<IInvitationFactory, EntitiesFactory>();
+            services.AddScoped<IInvitationFactory, InvitationFactory>();
 
             return services;
         }

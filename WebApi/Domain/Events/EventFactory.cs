@@ -7,9 +7,14 @@ namespace Domain.Events
 {
     public class EventFactory : IEventFactory
     {
-        public IEvent CreateEvent(string name, string description, DateTime stardDate, IInvitationFactory _iInvitationFactory)
+        public IEvent CreateEvent(string name, string description, DateTime startDate)
         {
-            throw new NotImplementedException();
+            Event @event = new Event() { 
+                Name = name,
+                Description = description,
+                StartDate = startDate
+            };
+            return @event;
         }
     }
 }

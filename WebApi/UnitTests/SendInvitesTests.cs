@@ -10,7 +10,7 @@ namespace UnitTests
     public class SendInvitesTests
     {
         private readonly EventContext _context;
-        private readonly EntitiesFactory _factory;
+        private readonly InvitationFactory _invitationFactory;
 
         public SendInvitesTests()
         {
@@ -19,7 +19,7 @@ namespace UnitTests
                 .Options;
 
             _context = new EventContext(options);
-            _factory = new EntitiesFactory();
+            _invitationFactory = new InvitationFactory();
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace UnitTests
             var @event = _context.Add(new Infrastructure.Entities._Event("Fest", "Kul fest", DateTime.Now));
             var emails = new List<string>() { "asd@asd.com" };
             var input = new InvitationInput(emails, @event.Entity.Id);
-            new SendInvitesUseCase(_context, _factory).Execute(input);
+            new SendInvitesUseCase(_context, _invitationFactory).Execute(input);
 
             Assert.NotEmpty(_context.Find<Infrastructure.Entities._Event>(@event.Entity.Id).SentInvitations);
         }
@@ -39,7 +39,7 @@ namespace UnitTests
             var @event = _context.Add(new Infrastructure.Entities._Event("Fest", "Kul fest", DateTime.Now));
             var emails = new List<string>() { "asd@asd.com", "test@test.com" };
             var input = new InvitationInput(emails, @event.Entity.Id);
-            new SendInvitesUseCase(_context, _factory).Execute(input);
+            new SendInvitesUseCase(_context, _invitationFactory).Execute(input);
 
             Assert.Equal(2, _context.Find<Infrastructure.Entities._Event>(@event.Entity.Id).SentInvitations.Count);
         }

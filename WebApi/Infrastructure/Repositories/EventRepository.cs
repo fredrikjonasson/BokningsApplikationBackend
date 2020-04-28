@@ -1,4 +1,5 @@
 ﻿using Domain.Events;
+using Domain.Invitations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

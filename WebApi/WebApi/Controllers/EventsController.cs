@@ -17,12 +17,12 @@ namespace WebApi.Controllers
         private readonly IUseCase<InvitationInput> _inviteUseCase;
         private readonly IEventFactory _eventFactory;
 
-        public EventsController(IPostEvent postEvent, IGetEvent getEvent, IUseCase<InvitationInput> inviteUseCase, IEventFactory eventFactory)
+        public EventsController(IPostEvent postEvent, IGetEvent getEvent, IUseCase<InvitationInput> inviteUseCase)
         {
             _postEvent = postEvent;
             _getEvent = getEvent;
             _inviteUseCase = inviteUseCase;
-            _eventFactory = eventFactory;
+            _eventFactory = new Domain.Events.EventFactory();
         }
 
         [HttpPost]
