@@ -6,7 +6,6 @@ namespace Domain.Events
 {
     public class GetEvent : IGetEvent
     {
-        private readonly DbContext _dbContext;
         private readonly IEventRespository _eventRepository;
 
         public GetEvent(IEventRespository repository)

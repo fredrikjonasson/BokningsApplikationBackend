@@ -9,12 +9,12 @@ namespace Infrastructure.Entities
         public Guid Id { get; set; }
         public string Email { get; set; }
         public bool Answered { get; set; }
-        public Guid EventId { get; set; }
+        public Guid _EventId { get; set; }
 
         public Invitation(string email, Guid eventId)
         {
             Email = email;
-            EventId = eventId;
+            _EventId = eventId;
         }
     }
 }
