@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace Domain.Invitations
 {
     public class Invitation : IInvitation

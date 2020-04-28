@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Domain.Invitations;
+using System;
 
 namespace Domain.Events
 {
     public interface IEventFactory
     {
-        public IEvent CreateEvent(string name, string description, DateTime stardDate);
+        public IEvent CreateEvent(string name, string description, DateTime stardDate, IInvitationFactory _iInvitationFactory);
     }
 }

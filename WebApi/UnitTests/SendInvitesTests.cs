@@ -25,23 +25,23 @@ namespace UnitTests
         [Fact]
         public void CanSendSingleInvite()
         {
-            var @event = _context.Add(new Infrastructure.Entities.Event("Fest", "Kul fest", DateTime.Now));
+            var @event = _context.Add(new Infrastructure.Entities._Event("Fest", "Kul fest", DateTime.Now));
             var emails = new List<string>() { "asd@asd.com" };
             var input = new InvitationInput(emails, @event.Entity.Id);
             new SendInvitesUseCase(_context, _factory).Execute(input);
 
-            Assert.NotEmpty(_context.Find<Infrastructure.Entities.Event>(@event.Entity.Id).SentInvitations);
+            Assert.NotEmpty(_context.Find<Infrastructure.Entities._Event>(@event.Entity.Id).SentInvitations);
         }
 
         [Fact]
         public void CanSendMultipleInvites()
         {
-            var @event = _context.Add(new Infrastructure.Entities.Event("Fest", "Kul fest", DateTime.Now));
+            var @event = _context.Add(new Infrastructure.Entities._Event("Fest", "Kul fest", DateTime.Now));
             var emails = new List<string>() { "asd@asd.com", "test@test.com" };
             var input = new InvitationInput(emails, @event.Entity.Id);
             new SendInvitesUseCase(_context, _factory).Execute(input);
 
-            Assert.Equal(2, _context.Find<Infrastructure.Entities.Event>(@event.Entity.Id).SentInvitations.Count);
+            Assert.Equal(2, _context.Find<Infrastructure.Entities._Event>(@event.Entity.Id).SentInvitations.Count);
         }
     }
 }

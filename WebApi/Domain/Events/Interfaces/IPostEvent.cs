@@ -1,7 +1,10 @@
-﻿namespace Domain.Events.Interfaces
+﻿using Domain.Interfaces;
+
+namespace Domain.Events.Interfaces
 {
     public interface IPostEvent
     {
-        public IEvent Execute(Event @event);
+        public IEvent Execute(IEvent @event);
+
     }
 }

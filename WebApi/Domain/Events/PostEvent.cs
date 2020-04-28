@@ -14,7 +14,7 @@ namespace Domain.Events
             _eventFactory = eventFactory;
         }
 
-        public IEvent Execute(Event @event)
+        public IEvent Execute(IEvent @event)
         {
             //Göra Repository pattern???
             var myEvent = dbContext.Add(_eventFactory.CreateEvent(@event.Name, @event.Description, @event.StartDate));

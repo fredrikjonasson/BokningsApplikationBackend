@@ -15,18 +15,20 @@ namespace WebApi.Controllers
         private readonly IPostEvent _postEvent;
         private readonly IGetEvent _getEvent;
         private readonly IUseCase<InvitationInput> _inviteUseCase;
+        private readonly IEventFactory _eventFactory;
 
-        public EventsController(IPostEvent postEvent, IGetEvent getEvent, IUseCase<InvitationInput> inviteUseCase)
+        public EventsController(IPostEvent postEvent, IGetEvent getEvent, IUseCase<InvitationInput> inviteUseCase, IEventFactory eventFactory)
         {
             _postEvent = postEvent;
             _getEvent = getEvent;
             _inviteUseCase = inviteUseCase;
+            _eventFactory = eventFactory;
         }
 
         [HttpPost]
         public ActionResult Post(EventDto myEvent)
         {
-            var @convertedEvent = myEvent.ConvertToDomain();
+            var @convertedEvent = myEvent.ConvertToDomain(_eventFactory);
             var @event = _postEvent.Execute(convertedEvent);
             _inviteUseCase.Execute(new InvitationInput(myEvent.SentInvitations, @event.Id));
             return CreatedAtAction(nameof(GetById), new { id = @event.Id }, @event);
