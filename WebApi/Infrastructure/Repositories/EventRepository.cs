@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories
 
         public IEvent GetById(Guid id)
         {   
-            return _context.Set<Entities._Event>().Include(e => e.SentInvitations).Single(e => e.Id == id);
+            return _context.Set<Entities.Event>().Include(e => e.SentInvitations).Single(e => e.Id == id);
         }
     }
 }

@@ -4,7 +4,7 @@ using Domain.Events;
 
 namespace Infrastructure.Entities
 {
-    public class _Event : IEvent
+    public class Event : IEvent
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -12,7 +12,7 @@ namespace Infrastructure.Entities
         public DateTime StartDate { get; set; }
         public List<Invitation> SentInvitations { get; set; }
 
-        public _Event(string name, string description, DateTime startDate)
+        public Event(string name, string description, DateTime startDate)
         {
             Name = name;
             Description = description;

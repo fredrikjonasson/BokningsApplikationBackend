@@ -36,7 +36,7 @@ namespace UnitTests
             var emails = new List<string>() { "asd@asd.com" };
             var input = new InvitationInput(emails, @event.Id);
             new SendInvitesUseCase(_context, _invitationFactory).Execute(input);
-            var createdEvent = (Infrastructure.Entities._Event) new GetEvent(new EventRepository(_context)).Execute(@event.Id);
+            var createdEvent = (Infrastructure.Entities.Event) new GetEvent(new EventRepository(_context)).Execute(@event.Id);
             Assert.NotEmpty(createdEvent.SentInvitations);
         }
 
@@ -48,7 +48,7 @@ namespace UnitTests
             var input = new InvitationInput(emails, @event.Id);
             new SendInvitesUseCase(_context, _invitationFactory).Execute(input);
 
-            var createdEvent = (Infrastructure.Entities._Event) new GetEvent(new EventRepository(_context)).Execute(@event.Id);
+            var createdEvent = (Infrastructure.Entities.Event) new GetEvent(new EventRepository(_context)).Execute(@event.Id);
             Assert.Equal(2, createdEvent.SentInvitations.Count);
         }
     }

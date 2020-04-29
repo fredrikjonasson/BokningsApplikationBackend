@@ -9,7 +9,7 @@ namespace Infrastructure
         {
 
         }
-        public DbSet<Entities._Event> Events { get; set; }
+        public DbSet<Entities.Event> Events { get; set; }
         public DbSet<Entities.Invitation> Invitations { get; set; }
         public DbSet<Organizer> Organizers { get; set; }
     }
