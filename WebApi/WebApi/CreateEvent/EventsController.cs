@@ -9,15 +9,15 @@ using System;
 namespace WebApi.CreateEvent
 {
     [ApiController]
-    [Route("[controller]")]
-    public class EventsController : ControllerBase
+    [Route("events")]
+    public class PostEventsController : ControllerBase
     {
         private readonly IPostEvent _postEvent;
         private readonly IGetEvent _getEvent;
         private readonly IUseCase<InvitationInput> _inviteUseCase;
         private readonly IEventFactory _eventFactory;
 
-        public EventsController(IPostEvent postEvent, IGetEvent getEvent, IUseCase<InvitationInput> inviteUseCase)
+        public PostEventsController(IPostEvent postEvent, IGetEvent getEvent, IUseCase<InvitationInput> inviteUseCase)
         {
             _postEvent = postEvent;
             _getEvent = getEvent;
