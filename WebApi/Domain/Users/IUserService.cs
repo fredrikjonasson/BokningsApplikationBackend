@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.User
+namespace Domain.Users
 {
     public interface IUserService
     {
         public string getExternalId();
-        public string getUserId();
+        public Guid getUserId();
     }
 }

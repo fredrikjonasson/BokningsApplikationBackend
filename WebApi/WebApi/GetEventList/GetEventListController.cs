@@ -1,12 +1,13 @@
 ﻿using Domain.Events;
 using Domain.Events.Interfaces;
-using Domain.User;
+using Domain.Users;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace WebApi.GetEventList
@@ -28,15 +29,12 @@ namespace WebApi.GetEventList
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IEnumerable<Event> GetEventList()
+        public ActionResult GetEventList()
         {
-            string id = _userService.getUserId();
-            _DbContext.Set<Event>().Where(x => x.);
-            _eventContext.Events.Where
-            throw new NotImplementedException();
+            Guid id = _userService.getUserId();
+            var user = _eventContext.Users.Find(id);
+            var organizer = _eventContext.Organizers.First(x => id == user.Id);
+            return Ok(organizer.Events);
         }
     }
-
-
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Users;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,9 @@ namespace Domain.Events
 
         public string Name { get; set;}
 
-        public ICollection<Event> Event { get; set; }
+        public User User { get; set; }
+
+        public ICollection<Event> Events { get; set; }
 
     }
 }
