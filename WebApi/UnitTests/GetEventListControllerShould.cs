@@ -29,7 +29,7 @@ namespace UnitTests
         public void SetupTest()
         {
             _userServiceMock = new Mock<IUserService>();
-            Guid guid = new Guid();
+            Guid guid = Guid.NewGuid();
             _userServiceMock.Setup(x => x.getUserId()).Returns(guid);
 
             _eventContext.Users.Add(new User
@@ -50,6 +50,7 @@ namespace UnitTests
                 }
             }); ;
 
+            _eventContext.SaveChanges();
         }
 
         [Fact]
