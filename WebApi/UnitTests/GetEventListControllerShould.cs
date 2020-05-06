@@ -1,34 +1,68 @@
 ﻿using Domain.Users;
 using Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Moq;
 using Microsoft.EntityFrameworkCore;
+using Domain.Events;
+using WebApi.GetEventList;
+using Xunit;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UnitTests
 {
-    [TestClass]
     public class GetEventListControllerShould
     {
-        private readonly IUserService _userServiceMock;
+        private Mock<IUserService> _userServiceMock;
         private readonly EventContext _eventContext;
 
         public GetEventListControllerShould()
         {
+            var options = new DbContextOptionsBuilder<EventContext>()
+           .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
+           .Options;
+
+            _eventContext = new EventContext(options);
         }
 
-        public void SetupTest() { 
-            var _userServiceMock = new Mock<IUserService>();
+        public void SetupTest()
+        {
+            _userServiceMock = new Mock<IUserService>();
             Guid guid = new Guid();
             _userServiceMock.Setup(x => x.getUserId()).Returns(guid);
-            _eventContext = new EventContext { 
-            Users = new DbSet<User> {
-                
-            
-            }
-            }
+
+            _eventContext.Users.Add(new User
+            {
+                Id = guid
+            });
+
+            _eventContext.Organizers.Add(new Domain.Events.Organizer
+            {
+                Id = guid,
+
+                Events = new List<Event>()
+                {
+                        new Event()
+                        {
+                            Name = "Berghain"
+                        }
+                }
+            }); ;
+
+        }
+
+        [Fact]
+        public void TestingGetEventList()
+        {
+            SetupTest();
+
+            var thaController = new GetEventListController(_userServiceMock.Object, _eventContext);
+
+            var events = (OkObjectResult)thaController.GetEventList();
+
+            Assert.NotEmpty((IEnumerable<Event>)events.Value);
+
         }
     }
 }

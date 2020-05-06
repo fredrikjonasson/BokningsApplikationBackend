@@ -16,14 +16,12 @@ namespace WebApi.GetEventList
     [Route("events")]
     public class GetEventListController : ControllerBase
     {
-        private readonly IGetEvent _getEvent;
         private readonly IUserService _userService;
         private readonly EventContext _eventContext;
 
 
-        public GetEventListController(IGetEvent getEvent, IUserService userService, EventContext eventContext)
+        public GetEventListController(IUserService userService, EventContext eventContext)
         {
-            _getEvent = getEvent;
             _userService = userService;
             _eventContext = eventContext;
         }
