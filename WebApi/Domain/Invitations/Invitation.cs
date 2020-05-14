@@ -5,6 +5,6 @@ namespace Domain.Invitations
     {
         public Guid Id { get; set; }
         public string Email { get; set; }
-        public bool Answered { get; set; }
+        public InvitationStatus InvitationStatus { get; set; }
     }
 }

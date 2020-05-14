@@ -16,7 +16,9 @@ namespace WebApi.DependencyInjection
             services.AddScoped<IEventFactory, Infrastructure.EventFactory>();
 
             services.AddScoped<IUseCase<InvitationInput>, SendInvitesUseCase>();
+            services.AddScoped<IUseCase<IInvitation>, ReplyUseCase>();
             services.AddScoped<IInvitationFactory, InvitationFactory>();
+            
 
             return services;
         }
