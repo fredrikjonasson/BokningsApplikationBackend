@@ -1,19 +1,23 @@
-﻿using Domain.Events;
+﻿using Domain.Configuration;
 using Domain.Interfaces;
-using Domain.Participants;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
-namespace Domain.Invitations.UseCases.SendInvites
+namespace Infrastructure
 {
     public class EmailService : IEmailService
     {
-        public List<Participant> SendEmail(string from, List<string> recipiants, string message)
+        private readonly EmailSettings _settings;
+
+        public EmailService(IOptions<EmailSettings> settings)
+        {
+            _settings = settings.Value;
+        }
+
+        public List<string> SendEmail(string from, List<string> recipiants, string message)
         {
             var newMessage = new MimeMessage();
             var bodyBuilder = new BodyBuilder();
@@ -33,12 +37,12 @@ namespace Domain.Invitations.UseCases.SendInvites
             var client = new SmtpClient();
 
             client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-            client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-            client.Authenticate("", "");
+            client.Connect(_settings.SmtpAddress, 465, SecureSocketOptions.SslOnConnect);
+            client.Authenticate(_settings.Username, _settings.Password);
             client.Send(newMessage);
             client.Disconnect(true);
 
-            return null;
+            return recipiants;
 
         }
     }

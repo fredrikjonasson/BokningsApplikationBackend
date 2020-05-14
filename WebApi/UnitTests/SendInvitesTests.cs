@@ -1,9 +1,11 @@
 ﻿using Domain.Events;
+using Domain.Interfaces;
 using Domain.Invitations;
 using Domain.Invitations.UseCases;
 using Infrastructure;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -16,6 +18,7 @@ namespace UnitTests
         private readonly IInvitationFactory _invitationFactory;
         private readonly IEventFactory _eventFactory;
         private readonly IEventRespository _eventRepository;
+        private readonly IEmailService _emailService;
 
         public SendInvitesTests()
         {
@@ -27,6 +30,7 @@ namespace UnitTests
             _invitationFactory = new Infrastructure.InvitationFactory();
             _eventFactory = new Infrastructure.EventFactory();
             _eventRepository = new EventRepository(_context);
+            _emailService = new Mock<IEmailService>().Object;
         }
 
         [Fact]
@@ -35,7 +39,7 @@ namespace UnitTests
             var @event = new PostEvent(_context, _eventFactory).Execute(new Event() { Name = "test", Description = "Test event", StartDate = DateTime.Now }); 
             var emails = new List<string>() { "asd@asd.com" };
             var input = new InvitationInput(emails, @event.Id);
-            new SendInvitesUseCase(_context, _invitationFactory).Execute(input);
+            new SendInvitesUseCase(_context, _invitationFactory, _emailService).Execute(input);
             var createdEvent = (Infrastructure.Entities.Event) new GetEvent(new EventRepository(_context)).Execute(@event.Id);
             Assert.NotEmpty(createdEvent.SentInvitations);
         }
@@ -46,7 +50,7 @@ namespace UnitTests
             var @event = new PostEvent(_context, _eventFactory).Execute(new Event() { Name = "test", Description = "Test event", StartDate = DateTime.Now });
             var emails = new List<string>() { "asd@asd.com", "test@test.com" };
             var input = new InvitationInput(emails, @event.Id);
-            new SendInvitesUseCase(_context, _invitationFactory).Execute(input);
+            new SendInvitesUseCase(_context, _invitationFactory, _emailService).Execute(input);
 
             var createdEvent = (Infrastructure.Entities.Event) new GetEvent(new EventRepository(_context)).Execute(@event.Id);
             Assert.Equal(2, createdEvent.SentInvitations.Count);

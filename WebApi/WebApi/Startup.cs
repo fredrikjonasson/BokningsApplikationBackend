@@ -1,12 +1,11 @@
-using Domain.Events;
+using Domain.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using WebApi.Configuration;
 using WebApi.DependencyInjection;
 
 namespace WebApi
@@ -26,7 +25,8 @@ namespace WebApi
             services.AddControllers();
             services.AddUseCases();
             services.AddInMemoryDb();
-           
+            services.AddScoped<IEmailService, EmailService>();
+            services.Configure<EmailSettings>(Configuration.GetSection("Email"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
