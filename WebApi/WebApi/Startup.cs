@@ -25,6 +25,7 @@ namespace WebApi
             services.AddControllers();
             services.AddUseCases();
             services.AddInMemoryDb();
+            services.AddDocumentation();
             services.AddScoped<IEmailService, EmailService>();
             services.Configure<EmailSettings>(Configuration.GetSection("Email"));
         }
@@ -43,7 +44,9 @@ namespace WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            
+            app.UseSwaggerDocs();
+            
             // Shows UseCors with CorsPolicyBuilder.
             app.UseCors(builder =>
             {

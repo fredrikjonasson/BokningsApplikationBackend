@@ -28,7 +28,7 @@ namespace Domain.Invitations.UseCases
 
             if (invitation.InvitationStatus == InvitationStatus.Accepted)
             {
-                _participantFactory.CreateParticipant(replyDTO)
+                _participantFactory.CreateParticipant(replyDTO);
             }
 
 
