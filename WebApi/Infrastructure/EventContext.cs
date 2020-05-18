@@ -8,7 +8,6 @@ namespace Infrastructure
     {
         public EventContext(DbContextOptions<EventContext> options) : base(options)
         {
-
         }
         public DbSet<Entities.Event> Events { get; set; }
         public DbSet<Entities.Invitation> Invitations { get; set; }

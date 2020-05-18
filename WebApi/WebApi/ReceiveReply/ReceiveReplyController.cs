@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Invitations.UseCases.ReplyInvite;
+using Domain.Interfaces;
 using Domain.Invitations;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,9 +9,10 @@ namespace WebApi.ReceiveReply
     [Route("events/{eventId}/invitations")]
     public class ReceiveReplyController : Controller
     {
-        public IUseCase<IInvitation> _useCase { get; set; }
+        public IUseCase<ReplyDTO> _useCase { get; set; }
 
-        public ReceiveReplyController(IUseCase<IInvitation> useCase)
+
+        public ReceiveReplyController(IUseCase<ReplyDTO> useCase)
         {
             _useCase = useCase;
         }
@@ -19,12 +21,8 @@ namespace WebApi.ReceiveReply
         [Route("{id}")]
         public IActionResult ReceiveReply(Guid id, bool answer)
         {
-            IInvitation invitation = new Invitation();
-            invitation.Id = id;
-
-            invitation.InvitationStatus = answer ? InvitationStatus.Accepted : InvitationStatus.Rejected;
-            
-            _useCase.Execute(invitation);
+            var replyDTO = new ReplyDTO(id, answer);
+            _useCase.Execute(replyDTO);
             throw new NotImplementedException();
         }
     }

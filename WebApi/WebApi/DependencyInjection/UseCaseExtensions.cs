@@ -5,6 +5,7 @@ using Domain.Invitations;
 using Domain.Invitations.UseCases;
 using Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using Domain.Invitations.UseCases.ReplyInvite;
 
 namespace WebApi.DependencyInjection
 {
@@ -16,7 +17,7 @@ namespace WebApi.DependencyInjection
             services.AddScoped<IEventFactory, Infrastructure.EventFactory>();
 
             services.AddScoped<IUseCase<InvitationInput>, SendInvitesUseCase>();
-            services.AddScoped<IUseCase<IInvitation>, ReplyUseCase>();
+            services.AddScoped<IUseCase<ReplyDTO>, ReplyUseCase>();
             services.AddScoped<IInvitationFactory, InvitationFactory>();
             
 

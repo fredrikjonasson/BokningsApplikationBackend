@@ -10,6 +10,8 @@ namespace Infrastructure.Entities
         public string Email { get; set; }
         public bool Answered { get; set; }
         public Guid EventId { get; set; }
+        public InvitationStatus InvitationStatus { get; set; }
+
 
         public Invitation(string email, Guid eventId)
         {
