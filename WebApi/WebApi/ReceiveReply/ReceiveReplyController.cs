@@ -19,7 +19,7 @@ namespace WebApi.ReceiveReply
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult ReceiveReply(Guid id, bool answer)
+        public IActionResult ReceiveReply(Guid id, bool answer, string FirstName, string LastName)
         {
             var replyDTO = new ReplyDTO(id, answer);
             _useCase.Execute(replyDTO);

@@ -23,15 +23,15 @@ namespace Domain.Invitations.UseCases
         public void Execute(ReplyDTO replyDTO)
         {
             Invitation invitation = _eventContext.Find<Invitation>(replyDTO.Id);
-            Event @event =_eventContext.Find<Event>(invitation.EventId);
-            if (replyDTO.Answer == true)
-            {
-                
+            Event @event = _eventContext.Find<Event>(invitation.EventId);
+            invitation.Reply(replyDTO.Answer);
 
-            } else
+            if (invitation.InvitationStatus == InvitationStatus.Accepted)
             {
-                invitation.InvitationStatus = InvitationStatus.Rejected;
+                _participantFactory.CreateParticipant(replyDTO)
             }
+
+
 
         }
     }

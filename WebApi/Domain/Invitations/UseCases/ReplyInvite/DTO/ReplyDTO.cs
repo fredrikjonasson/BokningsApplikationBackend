@@ -9,6 +9,9 @@ namespace Domain.Invitations.UseCases.ReplyInvite
     {
         public Guid Id { get; set; }
         public bool Answer { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
 
         public ReplyDTO(Guid id, bool Answer)
         {
