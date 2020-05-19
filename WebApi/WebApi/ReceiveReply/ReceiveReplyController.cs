@@ -19,9 +19,8 @@ namespace WebApi.ReceiveReply
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult ReceiveReply(Guid id, bool answer, string FirstName, string LastName)
+        public IActionResult ReceiveReply(Guid invitationId, Guid eventId, [FromBody]ReplyDTO replyDTO)
         {
-            var replyDTO = new ReplyDTO(id, answer);
             _useCase.Execute(replyDTO);
             throw new NotImplementedException();
         }
