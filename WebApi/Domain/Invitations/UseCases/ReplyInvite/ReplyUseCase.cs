@@ -28,11 +28,10 @@ namespace Domain.Invitations.UseCases
 
             if (invitation.InvitationStatus == InvitationStatus.Accepted)
             {
-                _participantFactory.CreateParticipant(replyDTO);
+                _eventContext.Add<Participant>(_participantFactory.CreateParticipant(replyDTO));
             }
-
-
-
+            _eventContext.Update(invitation);
+            _eventContext.SaveChanges();
         }
     }
 }

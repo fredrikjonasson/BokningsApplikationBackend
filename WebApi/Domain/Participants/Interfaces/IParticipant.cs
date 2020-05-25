@@ -7,6 +7,6 @@ namespace Domain.Participants.Interfaces
     public interface IParticipant
     {
         public Guid Id { get; set; }
-        public IContactInformation ContactInformation { get; set; }
+        public ContactInformation ContactInformation { get; set; }
     }
 }
