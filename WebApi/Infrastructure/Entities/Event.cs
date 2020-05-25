@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain.Events;
-using Domain.Participants;
 
 namespace Infrastructure.Entities
 {
@@ -20,6 +19,7 @@ namespace Infrastructure.Entities
             Description = description;
             StartDate = startDate;
             SentInvitations = new List<Invitation>();
+            Participants = new List<Participant>();
         }
     }
 }

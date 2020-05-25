@@ -3,7 +3,7 @@ using System;
 
 namespace Domain.Participants
 {
-    public class Participant : IParticipant
+    public abstract class Participant : IParticipant
     {
         public Guid Id { get; set; }
         public ContactInformation ContactInformation { get; set; }

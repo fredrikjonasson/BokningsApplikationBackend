@@ -1,24 +1,18 @@
-﻿using Domain.Invitations.UseCases.ReplyInvite;
-using Domain.Participants;
+﻿using Domain.Participants;
 using Domain.Participants.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infrastructure
 {
     public class ParticipantFactory : IParticipantFactory
     {
-        public Participant CreateParticipant(ReplyDTO replyDTO)
+        public IParticipant CreateParticipant(Guid eventId, ContactInformation contact)
         {
-            ContactInformation contactInformation = new ContactInformation
-            {
-                FirstName = replyDTO.FirstName,
-                LastName = replyDTO.LastName,
-                Email = replyDTO.Email
+            var participant = new Infrastructure.Entities.Participant
+            { 
+                ContactInformation = contact,
+                EventId = eventId
             };
-
-            Participant participant = new Participant { ContactInformation = contactInformation };
             return participant;
         }
     }

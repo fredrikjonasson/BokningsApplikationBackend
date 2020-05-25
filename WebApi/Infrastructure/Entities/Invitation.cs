@@ -18,5 +18,11 @@ namespace Infrastructure.Entities
             Email = email;
             EventId = eventId;
         }
+
+        public void Reply(bool answer)
+        {
+            InvitationStatus = answer ? InvitationStatus.Accepted : InvitationStatus.Rejected;
+
+        }
     }
 }

@@ -4,10 +4,10 @@ using Domain.Invitations.UseCases;
 using Domain.Invitations.UseCases.ReplyInvite;
 using Domain.Participants.Interfaces;
 using Infrastructure;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Xunit;
 
 namespace UnitTests
@@ -15,14 +15,18 @@ namespace UnitTests
     public class ReplyUseCaseShould
     {
         private EventContext _context;
-        private readonly IParticipantFactory participantFactory;
+        private readonly IParticipantFactory _participantFactory;
+        private readonly IEventRespository _eventRepository;
+        private readonly IInvitationRepository _invitationRepository;
         private Guid invitationTestGuid = Guid.NewGuid();
         private Guid eventTestGuid = Guid.NewGuid();
 
         public ReplyUseCaseShould()
         {
             SetupContext();
-            participantFactory = new ParticipantFactory();
+            _participantFactory = new ParticipantFactory();
+            _invitationRepository = new InvitationRepository(_context);
+            _eventRepository = new EventRepository(_context);
         }
 
         private void SetupContext()
@@ -51,21 +55,17 @@ namespace UnitTests
             _context.SaveChanges();
         }
 
-        private ReplyDTO setupDTO()
-        {
-            return new ReplyDTO(invitationTestGuid, true);
-        }
-
         [Fact]
-        public void ExecuteShould()
+        public void AddParticipantWhenInviteAccepted()
         {
             PopulateContext();
-            var testUseCase = new ReplyUseCase(_context, participantFactory);
-            ReplyDTO replyDTO = setupDTO();
-            testUseCase.Execute(replyDTO);
+            var testUseCase = new ReplyUseCase(_context, _participantFactory, _eventRepository, _invitationRepository);
+            testUseCase.Execute(new ReplyDTO(invitationTestGuid, true));
 
-            Event @event = _context.Find<Event>(eventTestGuid);
-
+            var @event = _context.Find<Infrastructure.Entities.Event>(eventTestGuid);
+            var invitation = _context.Find<Infrastructure.Entities.Invitation>(invitationTestGuid);
+            var par = _context.Participants.ToList();
+            Assert.Equal(InvitationStatus.Accepted, invitation.InvitationStatus);
             Assert.NotEmpty(@event.Participants);
         }
 

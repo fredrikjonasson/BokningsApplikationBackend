@@ -26,7 +26,7 @@ namespace UnitTests
             _eventContext = new EventContext(options);
         }
 
-        public void SetupTest()
+        private void SetupTest()
         {
             _userServiceMock = new Mock<IUserService>();
             Guid guid = Guid.NewGuid();

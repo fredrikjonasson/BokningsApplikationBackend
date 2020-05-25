@@ -1,13 +1,9 @@
-﻿using Domain.Invitations.UseCases.ReplyInvite;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
+﻿using System;
 
 namespace Domain.Participants.Interfaces
 {
     public interface IParticipantFactory
     {
-        public Participant CreateParticipant(ReplyDTO replyDTO);
+        public IParticipant CreateParticipant(Guid eventId, ContactInformation contactInformation);
     }
 }
