@@ -4,9 +4,6 @@ using Domain.Invitations.UseCases.ReplyInvite;
 using Domain.Participants;
 using Domain.Participants.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 namespace Domain.Invitations.UseCases
 {
     public class ReplyUseCase : IUseCase<ReplyDTO>
@@ -22,8 +19,8 @@ namespace Domain.Invitations.UseCases
 
         public void Execute(ReplyDTO replyDTO)
         {
-            Invitation invitation = _eventContext.Find<Invitation>(replyDTO.Id);
-            Event @event = _eventContext.Find<Event>(invitation.EventId);
+            var invitation = _eventContext.Find<Invitation>(replyDTO.Id);
+            var @event = _eventContext.Find<Event>(invitation.EventId);
             invitation.Reply(replyDTO.Answer);
 
             if (invitation.InvitationStatus == InvitationStatus.Accepted)

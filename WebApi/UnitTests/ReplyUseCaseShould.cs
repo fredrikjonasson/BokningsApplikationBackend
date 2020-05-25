@@ -24,32 +24,28 @@ namespace UnitTests
             SetupContext();
             participantFactory = new ParticipantFactory();
         }
-       
+
         private void SetupContext()
         {
             var options = new DbContextOptionsBuilder<EventContext>()
                     .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
                     .Options;
-            _context = new EventContext(options);   
+            _context = new EventContext(options);
         }
 
         private void PopulateContext()
         {
-            Invitation testInvitation = new Invitation {
-                Email = "testemail",
-                InvitationStatus = InvitationStatus.Accepted,
-                Id = invitationTestGuid,
-                EventId = eventTestGuid
-            };
-            DateTime dateTime = DateTime.Now;
-            Infrastructure.Entities.Event @event = new Infrastructure.Entities.Event("testeventname", "testeventdesc", dateTime); 
-            
+            var testInvitation = new Infrastructure.Entities.Invitation("testemail", eventTestGuid)
             {
-                Description = "testevent",
-                Name = "testeventname",
-                Id = eventTestGuid,
-                SentInvitations = new List<Invitation> { testInvitation }
+                InvitationStatus = InvitationStatus.Accepted,
+                Id = invitationTestGuid
             };
+
+            DateTime dateTime = DateTime.Now;
+            Infrastructure.Entities.Event @event = new Infrastructure.Entities.Event("testeventname", "testeventdesc", dateTime);
+            @event.Id = eventTestGuid;
+            @event.SentInvitations.Add(testInvitation);
+
 
             _context.Add(@event);
             _context.SaveChanges();

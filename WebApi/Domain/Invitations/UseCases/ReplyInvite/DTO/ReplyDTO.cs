@@ -13,9 +13,10 @@ namespace Domain.Invitations.UseCases.ReplyInvite
         public string LastName { get; set; }
         public string Email { get; set; }
 
-        public ReplyDTO(Guid id, bool Answer)
+        public ReplyDTO(Guid id, bool answer)
         {
-
+            Id = id;
+            Answer = answer;
         }
     }
 }
